@@ -9,7 +9,8 @@ def toa_to_phase(freq, freq_dot, toas):
         toas: array, times of arrival (in units of time from first observation, usually I use days)
 
     Returns:
-        toas_p: array Phase values corresponding to each toa, calculated according to input frequency and frequency derivative
+        toas_p: array, Phase values corresponding to each toa (phase model), calculated according to input frequency and frequency derivative.
+        
     """
 
     t_0 = toas[0]
