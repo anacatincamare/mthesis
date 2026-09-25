@@ -8,6 +8,6 @@ def zn_squared(phase_model, n):
         n: int, number of harmonics
     """
     N = len(toas_d) # total number of detections
-    phases = np.outer(np.arange(1, n+1), toas_d)
+    phases = 2*np.pi*np.outer(np.arange(1, n+1), toas_d)
     zn_sq = (2.0 / N) * np.sum(np.sum(np.cos(phases), axis = 1) ** 2 + np.sum(np.sin(phases), axis = 1) ** 2)
     return zn_sq
