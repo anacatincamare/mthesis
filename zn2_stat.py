@@ -53,7 +53,16 @@ def zn2_stat(source_name, n, nr_freq = 5000, highest_freq = 0.5, plotting = Fals
         plt.vlines(1 / freqs[np.argmax(zn_sq)],
                    ymin = min(zn_sq) - 10,
                     ymax = max(zn_sq) + 10,
-                      colors = "magenta", linestyles="--", label = "best period")
+                      colors = "magenta", linestyles="--",
+                        label = "best period",
+                        alpha = 0.5)
+        plt.hlines(scipy.stats.chi2.isf(0.001, 2*n),
+                   xmin = min(freqs),
+                   xmax = max(freqs),
+                   colors = "black",
+                   label = "p=0.001",
+                   linestyles = "--",
+                   alpha = 0.5)
         plt.xlabel("period [d]", fontsize = 15)
         plt.ylabel(f"$Z_{n}^2$", fontsize = 15)
         plt.legend()
@@ -69,6 +78,13 @@ def zn2_stat(source_name, n, nr_freq = 5000, highest_freq = 0.5, plotting = Fals
                       colors = "magenta",
                         linestyles="--",
                           label = f"best period - {1 / freqs[np.argmax(zn_sq)]} [d]")
+        plt.hlines(scipy.stats.chi2.isf(0.001, 2*n),
+            xmin = min(freqs),
+            xmax = max(freqs),
+            colors = "black",
+            label = "p=0.001",
+            linestyles = "--",
+            alpha = 0.5)
         plt.xlabel("period [d]", fontsize = 15)
         plt.ylabel(f"$Z_{n}^2$", fontsize = 15)
         plt.legend()
