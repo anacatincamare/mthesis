@@ -83,9 +83,10 @@ def generate_repeater_from_dist(
             break
 #    else:
 #        raise RuntimeError("max_windows reached before collecting n_points")
+    toas = np.concatenate(toas)[mask]   # drop the excess (latest) events
+    toas = np.array(toas)
     mask = toas < elapsed_time
-    return np.concatenate(toas)[mask]   # drop the excess (latest) events
-
+    return toas[mask]
 def observing_window_mask(toas, window = 10 / 1440, period = 1.0, t_offset = 0.0):
     """
     Masks the toas not included in a certain observing window. The observing window default is set to the CHIME obserwing window of 10 minutes once every 24 hours at midnight.
