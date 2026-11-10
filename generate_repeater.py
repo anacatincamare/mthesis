@@ -19,7 +19,7 @@ def weibull_widndow(shape, mean_wait, window, rng):
     return np.concatenate(out)
 
 def generate_repeater_from_dist(
-    n_points,
+    elapsed_time,
     period = False,
     window = False,
     dist="poisson",
@@ -50,7 +50,7 @@ def generate_repeater_from_dist(
     rng = np.random.default_rng(seed)
     dist = dist.lower() #lowercasing
     if not period:
-        window = 999999
+        window = elapsed_time
 
     # check that dist are available - def events method
     if dist == "poisson":
@@ -69,18 +69,17 @@ def generate_repeater_from_dist(
 
     # fill windows
     origin = t0 + window_start
-    toas, n_have = [], 0
+    toas, last_obs = [], 0
     for k in range(max_windows):
         ev = events_in_one_window()
         if ev.size:
             toas.append(origin + k * period + ev)
-            n_have += ev.size
-        if n_have >= n_points:
+        if toas[-1] >= elapsed_time:
             break
     else:
         raise RuntimeError("max_windows reached before collecting n_points")
 
-    return np.concatenate(toas)[:n_points]   # drop the excess (latest) events
+    return np.concatenate(toas)
 
 def observing_window_mask(toas, window = 10 / 1440, period = 1.0, t_offset = 0.0):
     """
