@@ -70,11 +70,15 @@ def generate_repeater_from_dist(
     # fill windows
     origin = t0 + window_start
     toas, last_obs = [], 0
+    if not period:
+        max_windows = 1
+        
     for k in range(max_windows):
         ev = events_in_one_window()
         if ev.size:
             toas.append(origin + k * period + ev)
             last_obs = toas[-1][-1]
+            print(last_obs)
         if last_obs >= elapsed_time:
             break
     else:
