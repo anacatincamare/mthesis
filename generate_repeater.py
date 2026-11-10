@@ -74,13 +74,13 @@ def generate_repeater_from_dist(
         ev = events_in_one_window()
         if ev.size:
             toas.append(origin + k * period + ev)
-        print(toas[-1])
-        if toas[-1] >= elapsed_time:
+            last_obs = toas[-1][-1]
+        if last_obs >= elapsed_time:
             break
     else:
         raise RuntimeError("max_windows reached before collecting n_points")
-
-    return np.concatenate(toas)
+    mask = toas < elapsed_time
+    return np.concatenate(toas)[mask]   # drop the excess (latest) events
 
 def observing_window_mask(toas, window = 10 / 1440, period = 1.0, t_offset = 0.0):
     """
