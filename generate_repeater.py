@@ -83,7 +83,7 @@ def generate_repeater_from_dist(
             break
 #    else:
 #        raise RuntimeError("max_windows reached before collecting n_points")
-    toas = np.concatenate(toas)[mask]   # drop the excess (latest) events
+    toas = np.concatenate(toas)   # drop the excess (latest) events
     toas = np.array(toas)
     mask = toas < elapsed_time
     return toas[mask]
