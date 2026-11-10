@@ -78,7 +78,6 @@ def generate_repeater_from_dist(
         if ev.size:
             toas.append(origin + k * period + ev)
             last_obs = toas[-1][-1]
-            print(len(last_obs))
         if last_obs >= elapsed_time:
             break
 #    else:
