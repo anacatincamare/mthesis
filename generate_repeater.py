@@ -8,7 +8,7 @@ import math
 
 def inhom_poisson_window(window_start, rates, window, rng):
     toas = [np.floor(window_start), np.floor(window_start + window)]
-    print()
+    print(np.floor(window_start), np.floor(window_start + window))
     for rate in rates[np.floor(window_start):np.floor(window_start + window)]:
         toas.append(poisson_window(rate, window = 1, rng = rng))
     return toas
