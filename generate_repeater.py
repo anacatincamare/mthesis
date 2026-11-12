@@ -11,7 +11,7 @@ def inhom_poisson_window(window_start, rates, window, rng):
     print(int(np.floor(window_start)), int(np.floor(window_start + window))-1)
     for rate in rates[int(np.floor(window_start)):int(np.floor(window_start + window))-1]:
         toas.append(poisson_window(rate, window = 1, rng = rng))
-    return toas
+    return np.array(toas)
     
 
 
